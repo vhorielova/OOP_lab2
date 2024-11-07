@@ -1,5 +1,6 @@
 package org.main;
 
+import org.parsers.TariffDOMParser;
 import org.tariff.Tariff;
 import org.tariff.Tariff.Plan;
 import org.parsers.TariffSAXParser;
@@ -18,7 +19,6 @@ public class Main {
             saxParser.parse(new File("src/main/resources/tariff.xml"), handler);
 
             Tariff tariff = handler.getTariff();
-            // Output result to verify
             for (Plan plan : tariff.getPlan()) {
                 System.out.println("Plan Name: " + plan.getName());
                 System.out.println("Operator: " + plan.getOperatorName());
@@ -26,7 +26,7 @@ public class Main {
                 System.out.println("Inside Network Call Price: " + plan.getCallPrices().getInsideNetwork());
                 System.out.println("Outside Network Call Price: " + plan.getCallPrices().getOutsideNetwork());
                 System.out.println("Landline Call Price: " + plan.getCallPrices().getLandline());
-                System.out.println("SMS Price: " + plan.getSmsPrice());
+                System.out.println("SMS Price: " + plan.getSMSPrice());
                 System.out.println("Favorite Number: " + plan.getParameters().getFavoriteNumber());
                 System.out.println("Billing: " + plan.getParameters().getBilling());
                 System.out.println("Connection Fee: " + plan.getParameters().getConnectionFee());
@@ -34,6 +34,31 @@ public class Main {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+
+        System.out.println("DOM Parser");
+        TariffDOMParser parser = new TariffDOMParser();
+        File xmlFile = new File("src/main/resources/tariff.xml");
+        Tariff tariff = parser.parseTariff(xmlFile);
+
+        // Print the parsed data
+        for (Tariff.Plan plan : tariff.getPlan()) {
+            System.out.println("Plan Name: " + plan.getName());
+            System.out.println("Operator Name: " + plan.getOperatorName());
+            System.out.println("Payroll: " + plan.getPayroll());
+            System.out.println("SMS Price: " + plan.getSMSPrice());
+
+            Tariff.Plan.CallPrices callPrices = plan.getCallPrices();
+            System.out.println("Inside Network: " + callPrices.getInsideNetwork());
+            System.out.println("Outside Network: " + callPrices.getOutsideNetwork());
+            System.out.println("Landline: " + callPrices.getLandline());
+
+            Tariff.Plan.Parameters parameters = plan.getParameters();
+            System.out.println("Favorite Number: " + parameters.getFavoriteNumber());
+            System.out.println("Billing: " + parameters.getBilling());
+            System.out.println("Connection Fee: " + parameters.getConnectionFee());
+            System.out.println("-------------------------------");
         }
     }
 }
