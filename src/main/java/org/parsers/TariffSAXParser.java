@@ -31,7 +31,7 @@ public class TariffSAXParser extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        content.setLength(0); // Clear content for new element
+        content.setLength(0);
         switch (qName) {
             case "Plan":
                 currentPlan = new Plan();
@@ -67,7 +67,7 @@ public class TariffSAXParser extends DefaultHandler {
                 currentCallPrices.setLandline(new BigDecimal(content.toString()));
                 break;
             case "SMSPrice":
-                currentPlan.setSmsPrice(new BigDecimal(content.toString()));
+                currentPlan.setSMSPrice(new BigDecimal(content.toString()));
                 break;
             case "FavoriteNumber":
                 currentParameters.setFavoriteNumber(new BigInteger(content.toString()));

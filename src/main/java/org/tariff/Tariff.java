@@ -21,7 +21,7 @@ public class Tariff {
         private String operatorName;
         private BigDecimal payroll;
         private CallPrices callPrices;
-        private BigDecimal smsPrice;
+        private BigDecimal SMSPrice;
         private Parameters parameters;
 
         public String getName() {
@@ -56,12 +56,12 @@ public class Tariff {
             this.callPrices = callPrices;
         }
 
-        public BigDecimal getSmsPrice() {
-            return smsPrice;
+        public BigDecimal getSMSPrice() {
+            return SMSPrice;
         }
 
-        public void setSmsPrice(BigDecimal smsPrice) {
-            this.smsPrice = smsPrice;
+        public void setSMSPrice(BigDecimal smsPrice) {
+            this.SMSPrice = SMSPrice;
         }
 
         public Parameters getParameters() {
