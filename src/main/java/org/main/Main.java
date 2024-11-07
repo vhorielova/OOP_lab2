@@ -1,6 +1,7 @@
 package org.main;
 
 import org.parsers.TariffDOMParser;
+import org.parsers.TariffStAXParser;
 import org.tariff.Tariff;
 import org.tariff.Tariff.Plan;
 import org.parsers.TariffSAXParser;
@@ -9,16 +10,21 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 
+import static org.validator.XMLValidator.validateXMLSchema;
+
 public class Main {
     public static void main(String[] args) {
+        Tariff tariff;
+        File xmlFile = new File("src/main/resources/tariff.xml");
+
         System.out.println("SAX parser");
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             TariffSAXParser handler = new TariffSAXParser();
-            saxParser.parse(new File("src/main/resources/tariff.xml"), handler);
+            saxParser.parse(xmlFile, handler);
 
-            Tariff tariff = handler.getTariff();
+            tariff = handler.getTariff();
             for (Plan plan : tariff.getPlan()) {
                 System.out.println("Plan Name: " + plan.getName());
                 System.out.println("Operator: " + plan.getOperatorName());
@@ -39,8 +45,7 @@ public class Main {
 
         System.out.println("DOM Parser");
         TariffDOMParser parser = new TariffDOMParser();
-        File xmlFile = new File("src/main/resources/tariff.xml");
-        Tariff tariff = parser.parseTariff(xmlFile);
+        tariff = parser.parseTariff(xmlFile);
 
         // Print the parsed data
         for (Tariff.Plan plan : tariff.getPlan()) {
@@ -59,6 +64,40 @@ public class Main {
             System.out.println("Billing: " + parameters.getBilling());
             System.out.println("Connection Fee: " + parameters.getConnectionFee());
             System.out.println("-------------------------------");
+        }
+
+        System.out.println("StAX Parser");
+        TariffStAXParser StAXparser = new TariffStAXParser();
+        tariff = StAXparser.parseTariff(String.valueOf(xmlFile));
+
+        // Print the parsed data
+        for (Tariff.Plan plan : tariff.getPlan()) {
+            System.out.println("Plan Name: " + plan.getName());
+            System.out.println("Operator Name: " + plan.getOperatorName());
+            System.out.println("Payroll: " + plan.getPayroll());
+            System.out.println("SMS Price: " + plan.getSMSPrice());
+
+            Tariff.Plan.CallPrices callPrices = plan.getCallPrices();
+            System.out.println("Inside Network: " + callPrices.getInsideNetwork());
+            System.out.println("Outside Network: " + callPrices.getOutsideNetwork());
+            System.out.println("Landline: " + callPrices.getLandline());
+
+            Tariff.Plan.Parameters parameters = plan.getParameters();
+            System.out.println("Favorite Number: " + parameters.getFavoriteNumber());
+            System.out.println("Billing: " + parameters.getBilling());
+            System.out.println("Connection Fee: " + parameters.getConnectionFee());
+            System.out.println("-------------------------------");
+        }
+
+        String xsdFilePath = "src/main/resources/tariff.xsd";
+
+        // Виконання валідації
+        boolean isValid = validateXMLSchema(xsdFilePath, String.valueOf(xmlFile));
+
+        if (isValid) {
+            System.out.println("XML документ відповідає схемі XSD.");
+        } else {
+            System.out.println("XML документ не відповідає схемі XSD.");
         }
     }
 }
