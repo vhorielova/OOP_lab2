@@ -49,11 +49,9 @@ public class TariffDOMParser {
                 parameters.setConnectionFee(new BigDecimal(getTagValue("ConnectionFee", parametersElement)));
                 plan.setParameters(parameters);
 
-                // Add to the plans list
                 plans.add(plan);
             }
 
-            // Set the plans list in Tariff
             tariff.getPlan().addAll(plans);
 
         } catch (Exception e) {
