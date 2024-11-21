@@ -45,7 +45,7 @@ public class Main {
                 System.out.println("Favorite Number: " + plan.getParameters().getFavoriteNumber());
                 System.out.println("Billing: " + plan.getParameters().getBilling());
                 System.out.println("Connection Fee: " + plan.getParameters().getConnectionFee());
-                System.out.println("---------");
+                System.out.println("-------------------------------");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,8 +126,6 @@ public class Main {
                     new StreamSource(xmlFile),
                     new StreamResult(outputXML)
             );
-
-            System.out.println("Трансформація завершена! Результат записаний у " + outputXML.getAbsolutePath());
 
         } catch (Exception e) {
             e.printStackTrace();
