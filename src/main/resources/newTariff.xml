@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><Tariff>
+    <Kyivstar>
+        <Plan id="1">
+                    
+            <Name>Love UA Song</Name>
+                    
+            <OperatorName>Kyivstar</OperatorName>
+                    
+            <Payroll>175</Payroll>
+                    
+            <CallPrices>
+                            
+                <InsideNetwork>1</InsideNetwork>
+                            
+                <OutsideNetwork>2</OutsideNetwork>
+                            
+                <Landline>4</Landline>
+                        
+            </CallPrices>
+                    
+            <SMSPrice>1</SMSPrice>
+                    
+            <Parameters>
+                            
+                <FavoriteNumber>1</FavoriteNumber>
+                            
+                <Billing>per-minute</Billing>
+                            
+                <ConnectionFee>10</ConnectionFee>
+                        
+            </Parameters>
+                
+        </Plan>
+        <Plan id="2">
+                    
+            <Name>Love UA Magnet</Name>
+                    
+            <OperatorName>Kyivstar</OperatorName>
+                    
+            <Payroll>200</Payroll>
+                    
+            <CallPrices>
+                            
+                <InsideNetwork>1</InsideNetwork>
+                            
+                <OutsideNetwork>2</OutsideNetwork>
+                            
+                <Landline>4</Landline>
+                        
+            </CallPrices>
+                    
+            <SMSPrice>1</SMSPrice>
+                    
+            <Parameters>
+                            
+                <FavoriteNumber>1</FavoriteNumber>
+                            
+                <Billing>per-minute</Billing>
+                            
+                <ConnectionFee>15</ConnectionFee>
+                        
+            </Parameters>
+                
+        </Plan>
+    </Kyivstar>
+    <Lifecell>
+        <Plan id="3">
+                    
+            <Name>Smart Life</Name>
+                    
+            <OperatorName>Lifecell</OperatorName>
+                    
+            <Payroll>190</Payroll>
+                    
+            <CallPrices>
+                            
+                <InsideNetwork>-5</InsideNetwork>
+                            
+                <OutsideNetwork>2</OutsideNetwork>
+                            
+                <Landline>5</Landline>
+                        
+            </CallPrices>
+                    
+            <SMSPrice>1.5</SMSPrice>
+                    
+            <Parameters>
+                            
+                <FavoriteNumber>5</FavoriteNumber>
+                            
+                <Billing>per-minute</Billing>
+                            
+                <ConnectionFee>5</ConnectionFee>
+                        
+            </Parameters>
+                
+        </Plan>
+    </Lifecell>
+</Tariff>
