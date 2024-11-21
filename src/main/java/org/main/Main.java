@@ -11,6 +11,10 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import static org.validator.XMLValidator.validateXMLSchema;
 
@@ -107,6 +111,26 @@ public class Main {
             System.out.println("XML документ відповідає схемі XSD.");
         } else {
             System.out.println("XML документ не відповідає схемі XSD.");
+        }
+
+        //Перетворення XSL
+        try {
+
+            File xsltFile = new File("src/main/resources/tariff.xsl");
+            File outputXML = new File("src/main/resources/newTariff.xml");
+
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer(new StreamSource(xsltFile));
+
+            transformer.transform(
+                    new StreamSource(xmlFile),
+                    new StreamResult(outputXML)
+            );
+
+            System.out.println("Трансформація завершена! Результат записаний у " + outputXML.getAbsolutePath());
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
